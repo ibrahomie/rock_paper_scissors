@@ -1,12 +1,7 @@
 function getComputerChoice() {
+    let choice = ['rock', 'paper', 'scissors'];
     let index = Math.floor(Math.random()*3)+1;
-    if (index === 1){
-        return 'rock';
-    } else if (index === 2) {
-        return 'paper';
-    } else {
-        return 'scissors';
-    }
+    return choice[index];
 }
 
 
@@ -31,14 +26,34 @@ function playRound(playerChoice, computerChoice) {
 
 
 function playGame() {
-    let round = 0;
+    let rock = document.querySelector('.rock');
+    let paper = document.querySelector('.paper');
+    let scissors = document.querySelector('.scissors');
     
-    while(round <= 4) {
-        let playerChoice = prompt('Chose Rock, paper, or Scissors')
-        let computerChoice = getComputerChoice()
-        console.log(playRound(playerChoice.toLocaleLowerCase(), computerChoice))
-        round++
-    }
+    rock.addEventListener('click', () => {
+        let playerChoice = 'rock';
+        let computerChoice = getComputerChoice();
+
+        document.querySelector('.round-state').textContent = playRound(playerChoice, computerChoice)
+    })
+
+    paper.addEventListener('click', () => {
+        let playerChoice = 'paper';
+        let computerChoice = getComputerChoice();
+
+        document.querySelector('.round-state').textContent = playRound(playerChoice, computerChoice)
+    })
+
+    scissors.addEventListener('click', () => {
+        let playerChoice = 'scissors';
+        let computerChoice = getComputerChoice();
+
+        document.querySelector('.round-state').textContent = playRound(playerChoice, computerChoice)
+    })
+   
+       
+        
+  
 }
 
 
