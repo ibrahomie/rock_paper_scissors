@@ -6,22 +6,21 @@ function getComputerChoice() {
 
 
 
-function playRound(playerChoice, computerChoice) {
-    
+function getRoundResult(playerChoice, computerChoice) {
+    let playerScore = 0;
+    let computerScore = 0;
+
     if ((playerChoice === 'rock' && computerChoice === 'scissors')
         || (playerChoice === 'paper' && computerChoice === 'rock')
         || (playerChoice === 'scissors' && computerChoice === 'paper')) {
-            return ('You win! ' + playerChoice + ' beats ' + computerChoice);
+            return 'win';
         } else if ((playerChoice === 'rock' && computerChoice === 'paper')
         || (playerChoice === 'paper' && computerChoice === 'scissors')
         || (playerChoice === 'scissors' && computerChoice === 'rock')) {
-            return ('You loose! ' + computerChoice + ' beats ' + playerChoice);
-        } else if (playerChoice === computerChoice) {
-            return ('Draw! ' + computerChoice + ' and ' + playerChoice + ' are friends');
+            return 'lose'
         } else {
-            return 'Make a valid choice!!';
+            return 'draw';
         }
-
 }
 
 
@@ -29,30 +28,49 @@ function playGame() {
     let rock = document.querySelector('.rock');
     let paper = document.querySelector('.paper');
     let scissors = document.querySelector('.scissors');
-    
-    rock.addEventListener('click', () => {
-        let playerChoice = 'rock';
+    let wins = 0;
+    let loses = 0;
+
+    function playRound(e) {
+        let playerChoice = e.target.textContent.toLowerCase();
         let computerChoice = getComputerChoice();
+        let result = getRoundResult(playerChoice, computerChoice);
+        let gameStatus = document.querySelector('.game-status');
+        let body = document.querySelector('body');
 
-        document.querySelector('.round-state').textContent = playRound(playerChoice, computerChoice)
-    })
+        if(result === 'win') {
+            wins++;
+            gameStatus.textContent = `${playerChoice} beats ${computerChoice}`;
+            body.style.backgroundColor = 'lightgreen';
+        }
+        if(result === 'lose') {
+            loses++;
+            gameStatus.textContent = `${playerChoice} loses to ${computerChoice}`;
+            body.style.backgroundColor = 'tomato';
+        }
+        if(result === 'draw') {
+            gameStatus.textContent = `${playerChoice} and ${computerChoice}, draw`;
+            body.style.backgroundColor = 'lightgrey';
+        }
 
-    paper.addEventListener('click', () => {
-        let playerChoice = 'paper';
-        let computerChoice = getComputerChoice();
+        if(wins == 5) {
+            gameStatus.textContent = 'You Win';
+            wins = 0;
+            loses = 0;
+        }
+        if(loses == 5) {
+            gameStatus.textContent = 'You Lose';
+            wins = 0;
+            loses = 0;
+        }
 
-        document.querySelector('.round-state').textContent = playRound(playerChoice, computerChoice)
-    })
+        document.querySelector('.player-score').textContent = wins;
+        document.querySelector('.computer-score').textContent = loses;
+    }
 
-    scissors.addEventListener('click', () => {
-        let playerChoice = 'scissors';
-        let computerChoice = getComputerChoice();
-
-        document.querySelector('.round-state').textContent = playRound(playerChoice, computerChoice)
-    })
-   
-       
-        
+    rock.addEventListener('click', playRound);
+    paper.addEventListener('click', playRound);
+    scissors.addEventListener('click', playRound);
   
 }
 
