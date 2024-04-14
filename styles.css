@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.player-score, .computer-score {
+    border: 5px dashed black;
+    width: 150px;
+    height: 170px;
+    font-size: 115px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scores {
+    display: flex;
+    gap: 16px;
+}
+
+.btns {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    width: 80px;
+    background-color: transparent;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border: 3px solid black;
+    padding: 8px 16px;
+    margin-top: 16px;
+}
+
+button:hover {
+    background-color: rgb(35, 36, 36);
+    color: whit;
+}
+
+button:active {
+    border-color: black;
+    color: white;
+}
+
+.game-status {
+    font-size: 24px;
+}
